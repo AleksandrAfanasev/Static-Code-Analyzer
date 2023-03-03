@@ -3,20 +3,20 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/369660/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Thu, 01 Jan 1970 00:00:00 UTC"
+update_date: "Fri, 03 Mar 2023 16:27:00 UTC"
 stages:
 - id: 609
   step: 9903
   is_completed: true
 - id: 610
   step: 9904
-  is_completed: false
+  is_completed: true
 - id: 611
   step: 9905
-  is_completed: false
+  is_completed: true
 - id: 612
   step: 9906
-  is_completed: false
+  is_completed: true
 - id: 613
   step: 9907
   is_completed: false
@@ -68,12 +68,12 @@ topics:
     theory_id: 6057
   - title: Packages
     theory_id: 6384
+  - title: Pip
+    theory_id: 6230
   - title: Class
     theory_id: 6661
   - title: Class instances
     theory_id: 6669
-  - title: Pip
-    theory_id: 6230
   - title: Virtual Environment
     theory_id: 13923
   - title: For loop

@@ -352,6 +352,9 @@ files:
     if __name__ == '__main__':
         AnalyzerTest("analyzer.code_analyzer").run_tests()
   learner_created: false
-feedback_link: https://hyperskill.org/projects/112/stages/611/implement#comment
-status: Unchecked
-record: -1
+feedback_link: https://hyperskill.org/learn/step/9905#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 03 Mar 2023 16:27:04 UTC"
+record: 3
