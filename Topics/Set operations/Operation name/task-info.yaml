@@ -1,5 +1,10 @@
 type: choice
 is_multiple_choice: false
+options:
+- text: difference
+- text: difference_update
+- text: union
+- text: intersection_update
 files:
 - name: main.py
   visible: true

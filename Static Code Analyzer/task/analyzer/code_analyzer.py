@@ -1,6 +1,8 @@
 import re
 import sys
 import os
+import ast
+
 
 file_paths = []
 args = sys.argv
@@ -74,14 +76,35 @@ def class_name8(line):
 def f_name9(line):
     if 'def' in line:
         if 'def __init__' in line:
-             pass
+            pass
+        elif 'def _' in line:
+            pass
         elif not re.match(r'(\s+)?def\s+[a-z]+(_[a-z]+)?', line):
             d_name = line.lstrip()[3:-4].lstrip()
             print(f"{file_path}: Line {cnt}: S009 Function name '{d_name}' should use snake_case")
 
 
-empty_lines = 0
+def ast_check_s010_s012(path):
+    script = open(path).read()
+    tree = ast.parse(script)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            arguments = [a.arg for a in node.args.args]
+            for arg in arguments:
+                if re.match('^(:?[_a-z][_a-z0-9]*)+$', arg) is None:
+                    print(f"{path}: Line {node.lineno}: S010 Argument name '{arg}' should be snake_case")
+            for value in node.args.defaults:
+                if isinstance(value, ast.List):
+                    print(f"{path}: Line {node.lineno}: S012 Default argument value '{arg}' is mutable")
+            for v in node.body:
+                if isinstance(v, ast.Assign):
+                    for g in v.targets:
+                        if isinstance(g, ast.Name):
+                            if re.match('^(:?[_a-z][_a-z0-9]*)+$', g.id) is None:
+                                print(f"{path}: Line {g.lineno}: S011 Variable '{g.id}' in function should be snake_case")
 
+
+empty_lines = 0
 if len(file_paths) > 0:
     for file_path in file_paths:
         cnt = 0
@@ -106,6 +129,7 @@ if len(file_paths) > 0:
                 spaces_after_construction_name7(line)
                 class_name8(line)
                 f_name9(line)
+        ast_check_s010_s012(file_path)
 
 else:
     if ".py" in args[1]:
@@ -130,3 +154,4 @@ else:
                 spaces_after_construction_name7(line)
                 class_name8(line)
                 f_name9(line)
+            ast_check_s010_s012(file_path)
